@@ -1,0 +1,29 @@
+#include <stdio.h>
+int main()
+{
+
+     int n,i,id,age,marks;
+     printf("Enter number of students: ");
+     scanf("%d",&n);
+      for(i=1;i<=n;i++)
+     {
+      printf("\nDetails of %d student\n",i);
+     printf("Enter student id: ");
+     scanf("%d",&id);
+     printf("Enter student age: ");
+     scanf("%d",&age);
+     printf("Enter student marks: ");
+     scanf("%d",&marks);
+     
+     if((age>20) && (marks<100) && (marks>0))
+     printf("The data is valid\n");
+    else
+    printf("The data is INVALID\n ");
+    
+    if((age>20) && (marks<100) && (marks>65))
+     printf("Admission Granted\n");
+    else
+    printf("Admission denied\n ");
+     }
+return 0;
+}
