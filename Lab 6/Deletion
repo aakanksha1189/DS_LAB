@@ -1,0 +1,176 @@
+#include <stdio.h>
+#include <stdlib.h>
+void create();
+void display();
+void insert_before();
+void delete_beg();
+void delfun();
+void delete_end();
+struct node
+{
+    char name[20];
+    char id[20];
+    int sem;
+    struct node *next;
+};
+struct node *head=NULL;
+
+int main()
+{
+    int ch;
+    do{
+        printf("\n1. Create\n2. Display\n3. Insert_before\n4. Delete from begining\n5. Delete desired element\n6. Delete from end\n7. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: create(); 
+                    break;
+            
+            case 2: display();
+                    break;
+            
+            case 3: insert_before();
+                    break;
+                    
+            case 4: delete_beg();
+                    break;
+            
+            case 5: delfun();
+                    break;
+            
+            case 6: delete_end();
+                    break;
+            
+            case 7: exit(0);
+        }
+    }while(ch != 7);
+    return 0;
+}
+
+void create()
+{
+    struct node *newnode,*temp;
+    int item;
+    newnode =(struct node *) malloc (sizeof(struct node));
+    printf("Enter the name: ");
+    scanf("%s",newnode->name);
+
+    printf("Enter the id: ");
+    scanf("%s",newnode->id);
+
+    printf("Enter the sem: ");
+    scanf("%d",&item);
+    newnode->sem=item;
+    
+    if (head==NULL)
+    { 
+       newnode->next=NULL;
+      head=newnode; 
+    }
+     else 
+    {
+    temp=head;
+       while(temp->next!=NULL)
+       {
+            temp=temp->next;
+        }
+      temp->next=newnode;
+      newnode->next=NULL;
+   }  
+}
+
+void display()
+{
+    struct node *ptr=NULL;
+    ptr=head;
+     
+    if(ptr==NULL)
+    {
+        printf("List is Empty\n");
+    }
+    else
+    {
+        while(ptr!=NULL)
+       {
+        printf("%s %s %d\n",ptr->name, ptr->id, ptr->sem);
+        ptr=ptr->next;
+       }
+    }
+}
+
+void insert_before()
+{
+    struct node *newnode;
+    int ele;
+    char snm;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    
+    printf("Enter the name: ");
+    scanf("%s",newnode->name);
+
+    printf("Enter the id: ");
+    scanf("%s",newnode->id);
+    
+    printf("Enter the sem: ");
+    scanf("%d",&ele);
+    
+    newnode->sem =ele;
+    newnode->next=head;
+    head=newnode;
+}
+
+void delete_beg()
+{
+    struct node* temp=head;
+    head=head->next;
+    free(temp);
+    printf("Node Deleted\n");
+}
+
+void delfun()
+{
+    struct node* temp,*del=NULL;
+    char ele[20];
+    printf("Enter the id: ");
+    scanf("%s",&ele);
+    if (head == NULL)
+     {
+        printf("Empty List. \n");
+        return;
+     }
+     temp=head;
+     if(strcmp(head->id,ele)==0)
+     {
+        head=head->next;
+        return;
+     }
+    while (temp->next!=NULL)
+    {
+        if((temp->next->id,ele)==0)
+        {
+            del=temp->next;
+           if(del->next==NULL)
+           temp->next=NULL;
+           else
+            temp->next=del->next;
+        }
+            
+        else
+           temp=temp->next; 
+    }
+    if(del==NULL)
+    {
+        printf("Element not found \n");
+        return;
+  }
+}
+
+void delete_end()
+{
+    struct node* temp=head;
+    for(temp;(temp->next)->next!=NULL;temp=temp->next);
+    free(temp->next);
+    temp->next=NULL;
+    printf("Node Deleted\n");
+}
